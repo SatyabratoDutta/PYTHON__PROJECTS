@@ -1,0 +1,119 @@
+expenses = []
+
+
+def add_expense():
+    print("\n===== ADD EXPENSE =====")
+
+    date = input("Enter date (DD-MM-YYYY): ")
+    category = input("Enter category: ")
+    amount = float(input("Enter amount: "))
+    note = input("Enter note: ")
+
+    expense = {
+        "date": date,
+        "category": category,
+        "amount": amount,
+        "note": note
+    }
+
+    expenses.append(expense)
+
+    print("Expense added successfully!")
+
+
+def view_expenses():
+    print("\n===== ALL EXPENSES =====")
+
+    if len(expenses) == 0:
+        print("No expenses found.")
+        return
+
+    for i, expense in enumerate(expenses, start=1):
+        print("\nExpense", i)
+        print("Date     :", expense["date"])
+        print("Category :", expense["category"])
+        print("Amount   : ₹", expense["amount"])
+        print("Note     :", expense["note"])
+
+
+def total_expense():
+    total = 0
+
+    for expense in expenses:
+        total += expense["amount"]
+
+    print("\nTotal Expense: ₹", total)
+
+
+def category_expense():
+    print("\n===== CATEGORY EXPENSE =====")
+
+    category = input("Enter category: ")
+    total = 0
+
+    for expense in expenses:
+        if expense["category"].lower() == category.lower():
+            total += expense["amount"]
+
+    print("Total spent on", category, ": ₹", total)
+
+
+def delete_expense():
+    print("\n===== DELETE EXPENSE =====")
+
+    if len(expenses) == 0:
+        print("No expenses found.")
+        return
+
+    view_expenses()
+
+    number = int(input("\nEnter expense number to delete: "))
+
+    if 1 <= number <= len(expenses):
+        expenses.pop(number - 1)
+        print("Expense deleted successfully!")
+    else:
+        print("Invalid expense number.")
+
+
+def main():
+
+    while True:
+
+        print("\n================================")
+        print("       PERSONAL EXPENSE TRACKER")
+        print("================================")
+        print("1. Add Expense")
+        print("2. View Expenses")
+        print("3. Total Expense")
+        print("4. Category-wise Expense")
+        print("5. Delete Expense")
+        print("6. Exit")
+        print("================================")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            add_expense()
+
+        elif choice == "2":
+            view_expenses()
+
+        elif choice == "3":
+            total_expense()
+
+        elif choice == "4":
+            category_expense()
+
+        elif choice == "5":
+            delete_expense()
+
+        elif choice == "6":
+            print("Thank you!")
+            break
+
+        else:
+            print("Invalid choice!")
+
+
+main()
