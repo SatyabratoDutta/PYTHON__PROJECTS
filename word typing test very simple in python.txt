@@ -1,0 +1,114 @@
+import time
+import random
+
+
+sentences = [
+    "Python is a powerful programming language.",
+    "Practice makes a person perfect.",
+    "Learning Python is fun and interesting.",
+    "Coding improves problem solving skills.",
+    "Never stop learning new things."
+]
+
+
+def typing_test():
+
+    sentence = random.choice(sentences)
+
+    print("\n====================================")
+    print("         TYPING SPEED TEST")
+    print("====================================")
+
+    print("\nType the following sentence:")
+    print("------------------------------------")
+    print(sentence)
+    print("------------------------------------")
+
+    input("\nPress ENTER to start...")
+
+    start_time = time.time()
+
+    user_text = input("\nStart typing: ")
+
+    end_time = time.time()
+
+    total_time = end_time - start_time
+
+    
+    correct = 0
+
+    for i in range(min(len(sentence), len(user_text))):
+        if sentence[i] == user_text[i]:
+            correct += 1
+
+    
+    wrong = abs(len(sentence) - len(user_text))
+
+    for i in range(min(len(sentence), len(user_text))):
+        if sentence[i] != user_text[i]:
+            wrong += 1
+
+    
+    if len(sentence) > 0:
+        accuracy = (correct / len(sentence)) * 100
+    else:
+        accuracy = 0
+
+    
+    words = len(user_text.split())
+    minutes = total_time / 60
+
+    if minutes > 0:
+        wpm = words / minutes
+    else:
+        wpm = 0
+
+    print("\n====================================")
+    print("             RESULTS")
+    print("====================================")
+
+    print("Time Taken       :", round(total_time, 2), "seconds")
+    print("Words Typed      :", words)
+    print("Correct Characters:", correct)
+    print("Wrong Characters  :", wrong)
+    print("Accuracy         :", round(accuracy, 2), "%")
+    print("Typing Speed     :", round(wpm, 2), "WPM")
+
+    if wpm >= 50:
+        print("Performance      : Excellent!")
+
+    elif wpm >= 35:
+        print("Performance      : Very Good!")
+
+    elif wpm >= 20:
+        print("Performance      : Good!")
+
+    else:
+        print("Performance      : Keep Practicing!")
+
+
+def main():
+
+    while True:
+
+        print("\n====================================")
+        print("       TYPING SPEED TESTER")
+        print("====================================")
+
+        print("1. Start Typing Test")
+        print("2. Exit")
+
+        choice = input("\nEnter your choice: ")
+
+        if choice == "1":
+            typing_test()
+
+        elif choice == "2":
+            print("\nThank you for using Typing Speed Tester!")
+            break
+
+        else:
+            print("Invalid choice!")
+
+
+main()
